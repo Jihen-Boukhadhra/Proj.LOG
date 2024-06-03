@@ -36,6 +36,7 @@ a. Search for the best Docker image for Rocky Linux (I'm using the minimal versi
 
 b. List the images available locally:
 #docker images
+------In case of MISTAKE: how to remove mistaken image: #docker rmi <IMAGE ID or IMAGE NAME>  or  #docker rm <CONTAINER ID or CONTAINER NAME>
 
 --------------------------------------------->Now your Rocky Linux environment is dockerised!
 
