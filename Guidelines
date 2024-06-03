@@ -1,0 +1,62 @@
+///////////////////////////////////////////// Section 1: Installation of Docker on Rocky Linux //////////////////////////////////////////
+
+1. Update your Rocky Linux system: 
+#sudo dnf update
+
+2. Install Docker following official instructions on Rocky Linux website: 
+-------------------------------------------------Step 1: Add Docker Repository---------------------------------
+a. Use the config-manager command below
+#sudo dnf config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo
+
+b. Update the repositories to ensure you get the latest Docker packages.
+#sudo dnf update
+
+------------------------------------------------Step 2: Install Docker Packages-------------------------------
+a. Install the packages with the following command:
+#sudo dnf install docker-ce docker-ce-cli containerd.io
+
+------------------------------------------------Step 3: Start Docker------------------------------------------
+a. Enable Docker service with the systemctl command
+#sudo systemctl enable docker
+#sudo chmod +x /etc/rc.d/rc.local                ------To fix this issue: The command returns no output if it executes successfully. However, since the /etc/rc.d/rc.local script is not executable by default in Rocky Linux--------------then renable the DOCKER SERVICE
+
+#sudo systemctl enable docker                 ------Putting it all together, when you run the command to enable the Docker service with systemctl, it will configure systemd to start the Docker daemon automatically on system boot, ensuring that Docker is ready to use without manual intervention
+
+b. Start Docker with the command below
+#sudo systemctl start docker
+
+c. Check if Docker is running by typing:
+#systemctl status docker   or   #sudo docker run hello-world
+
+d. Restart the system to apply the changes.
+
+----------------------------------------------Step 4: Test Docker Installation-------------------------------
+a. Search for the best Docker image for Rocky Linux (I'm using the minimal version):
+#docker pull rockylinux:9.3.20231119-minimal
+
+b. List the images available locally:
+#docker images
+
+--------------------------------------------->Now your Rocky Linux environment is dockerised!
+
+
+
+///////////////////////////////////////////// Section 2: Creation of necessary file //////////////////////////////////////////
+
+1. Create Dockerfile
+#sudo nano Dockerfile   ----check my full repo to see what you to write there
+
+2.Create Rsyslog configuration file
+#nano sudo rsyslog.conf
+
+3.Create the project log file    ----check my full repo to see what you to write there
+#sudo nano Proj_LOG.py
+
+
+///////////////////////////////////////////// Section 3: Building & Running the project //////////////////////////////////////////
+
+1.Build the Docker project
+#docker build -t LoggingProject .
+
+2.Run the Docker project
+#docker run LoggingProject
